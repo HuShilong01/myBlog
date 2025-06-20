@@ -2,8 +2,8 @@
 # 这个文档包含了本博客的设定信息，你可以编辑它来个性化自己的博客，
 #
 
-# 你的博客名称，请用你想要的博客名替换“LOFFER”，以下修改都可类似处理
-# 注意，“name: LOFFER”，冒号后面的空格不可以省略。
+# 你的博客名称，请用你想要的博客名替换"LOFFER"，以下修改都可类似处理
+# 注意，"name: LOFFER"，冒号后面的空格不可以省略。
 # 井号后面的文字是说明文档，不会被程序读取。
 
 # 描述/签名
@@ -31,6 +31,16 @@ avatar: /myBlog/images/logo.png
 # favicon: https://raw.githubusercontent.com/HuShilong01/myBlog/master/images/favicon.png
 favicon: /myBlog/images/favicon.png
 
+# 图片优化设置
+image_optimization:
+  # 启用图片懒加载
+  lazy_loading: true
+  # 启用图片预加载
+  preload_critical_images: true
+  # 图片格式优化
+  modern_formats: true
+  # 响应式图片
+  responsive_images: true
 
 # 菜单中的按钮
 navigation:
@@ -106,6 +116,13 @@ plugins:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
   - jekyll-paginate
+
+# 图片优化插件设置
+image_optimizer:
+  enabled: true
+  webp_support: true
+  lazy_loading: true
+  priority_loading: true
 
 # Exclude these files from your production _site
 exclude:

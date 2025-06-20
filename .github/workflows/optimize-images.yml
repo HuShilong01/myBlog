@@ -1,0 +1,47 @@
+name: Optimize Images
+
+on:
+  push:
+    paths:
+      - 'images/**'
+      - '.github/workflows/optimize-images.yml'
+  workflow_dispatch:
+
+jobs:
+  optimize-images:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        npm install -g imagemin-cli imagemin-webp
+        
+    - name: Create WebP images
+      run: |
+        # 查找所有JPG和PNG图片
+        find images -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" \) | while read file; do
+          # 生成WebP版本
+          webp_file="${file%.*}.webp"
+          if [ ! -f "$webp_file" ]; then
+            echo "Converting $file to WebP..."
+            imagemin "$file" --out-dir="$(dirname "$file")" --plugin=webp
+            # 重命名生成的WebP文件
+            mv "$(dirname "$file")/$(basename "$file" | sed 's/\.[^.]*$//').webp" "$webp_file"
+          fi
+        done
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add images/
+        git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate WebP images"
+        git push 

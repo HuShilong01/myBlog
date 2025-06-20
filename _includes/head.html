@@ -11,6 +11,18 @@
   <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
   <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
   <link rel="shortcut icon" href="{{ site.favicon }}">
+  
+  <!-- 预加载关键图片 -->
+  {% if page.layout == 'post' and page.hero_image %}
+  <link rel="preload" href="{{ page.hero_image }}" as="image" fetchpriority="high">
+  {% endif %}
+  
+  <!-- 预加载logo -->
+  <link rel="preload" href="{{ site.avatar }}" as="image" fetchpriority="high">
+  
+  <!-- 图片优化脚本 -->
+  <script src="{{ site.baseurl }}/assets/js/image-optimization.js" defer></script>
+  
   <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
   <script src="https://unpkg.com/feather-icons"></script>
   <script type="text/javascript" async
