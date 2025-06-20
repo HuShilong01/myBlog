@@ -51,7 +51,7 @@ excerpt_separator: <!-- more -->
 # 你的社交网络链接，它们会作为图标出现在你的网站页脚中，可选填写
 footer-links: 
   email: hushilong010109@gmail.com
-  github: HuShilong01 #https://github.com/<>
+  github: HuShilong01 #https://github.com/<>>
 
 
 # 站点页脚的文字
@@ -102,7 +102,7 @@ kramdown:
 sass:
   style: :expanded # You might prefer to minify using :compressed
 
-# Use the following plug-ins
+# Use the following plug-ins (GitHub Pages supported plugins only)
 plugins:
   - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
   - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
@@ -115,4 +115,7 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+  - _plugins
+  - PLUGIN_STATUS.md
+  - test_image_paths.md
 
