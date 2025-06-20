@@ -94,7 +94,7 @@ $dd-position: $dt-width+$dt-dd-space;
 }
 
 // 侧边栏背景图片设置
-$sidebar-background-image: url('./images/sidebar-bg.jpg'); // 背景图片路径
+$sidebar-background-image: url('/myBlog/images/sidebar-bg.jpg'); // 背景图片路径
 $sidebar-background-opacity: 0.3; // 背景图片透明度
 $sidebar-background-blend: overlay; // 背景混合模式
 $sidebar-background-position: center center; // 背景位置
@@ -102,7 +102,7 @@ $sidebar-background-repeat: no-repeat; // 背景重复
 $sidebar-background-size: cover; // 背景尺寸
 
 // 页面背景图片设置
-$page-background-image: url('./images/page-bg.jpg'); // 页面背景图片路径
+$page-background-image: url('/myBlog/images/page-bg.jpg'); // 页面背景图片路径
 $page-background-opacity: 0.2; // 页面背景图片透明度
 $page-background-position: center center; // 背景位置
 $page-background-repeat: no-repeat; // 背景重复
