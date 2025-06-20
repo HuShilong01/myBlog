@@ -23,4 +23,4 @@ toc: true
 
 ## 码表
 
-![ASCII码表](/images/ASCII/ASCII码表.jpg)
+![ASCII码表](../images/ASCII/ASCII码表.jpg)

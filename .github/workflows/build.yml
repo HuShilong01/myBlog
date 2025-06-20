@@ -1,0 +1,52 @@
+name: Build Jekyll site
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0'
+        bundler-cache: true
+        
+    - name: Install dependencies
+      run: |
+        gem install jekyll
+        gem install jekyll-sitemap
+        gem install jekyll-feed
+        gem install jekyll-paginate
+        
+    - name: Generate WebP images
+      run: |
+        # 安装ImageMagick用于图片转换
+        sudo apt-get update
+        sudo apt-get install -y imagemagick
+        
+        # 查找所有jpg和png图片并生成WebP版本
+        find images -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" | while read file; do
+          if [ ! -f "${file%.*}.webp" ]; then
+            echo "Converting $file to WebP..."
+            convert "$file" -quality 85 "${file%.*}.webp"
+          fi
+        done
+        
+    - name: Build site
+      run: |
+        jekyll build --trace --verbose
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: site-build
+        path: _site/ 
