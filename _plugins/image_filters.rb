@@ -18,12 +18,31 @@ module Jekyll
         src = $2
         title = $3
         
+        # 处理相对路径
+        normalized_src = normalize_image_path(src)
+        
         # 生成优化的HTML
-        generate_optimized_image_html(alt_text, src, title, content, match, config)
+        generate_optimized_image_html(alt_text, normalized_src, title, content, match, config)
       end
     end
 
     private
+
+    def normalize_image_path(src)
+      # 处理相对路径 ../images/xxx/xxx.jpg -> /images/xxx/xxx.jpg
+      if src.start_with?('../')
+        # 移除开头的 ../
+        src.sub(/^\.\.\//, '/')
+      elsif src.start_with?('./')
+        # 移除开头的 ./
+        src.sub(/^\.\//, '/')
+      elsif !src.start_with?('/') && !src.start_with?('http')
+        # 如果不是绝对路径或URL，添加前导斜杠
+        "/#{src}"
+      else
+        src
+      end
+    end
 
     def generate_optimized_image_html(alt_text, src, title, full_content, original_match, config)
       # 检查是否是文章中的第一张图片
